@@ -5,6 +5,7 @@ const initialState = {
   entities: [],
   status: LoadingStatuses.idle,
   hint: "",
+  tableIds: {},
 };
 
 export const searchSlice = createSlice({
@@ -27,6 +28,14 @@ export const searchSlice = createSlice({
     hintForUser: (state, action) => {
       state.entities = [];
       state.hint = action.payload;
+    },
+    addCity: (state, action) => {
+      state.tableIds = {
+        ...state.tableIds,
+        [action.payload]: state.entities.find((elem) => {
+          return elem.oktmo === action.payload;
+        }),
+      };
     },
   },
 });

@@ -12,7 +12,7 @@ export const Search = () => {
 
   const inpuRef = useRef(null);
 
-  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  const debouncedSearchTerm = useDebounce(searchTerm, 50);
 
   useEffect(() => {
     if (debouncedSearchTerm) {

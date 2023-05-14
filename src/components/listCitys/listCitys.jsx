@@ -9,6 +9,7 @@ import styles from "./styles.module.css";
 import React, { useRef } from "react";
 import classNames from "classnames";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
+import { City } from "../city/City";
 
 export const ListCitys = React.memo(({ inputRef, setText }) => {
   const citys = useSelector(selectCitysNameId);
@@ -40,7 +41,9 @@ export const ListCitys = React.memo(({ inputRef, setText }) => {
   return (
     <ul className={styles.list} ref={listRef}>
       {!isLoading ? (
-        citys.map((city) => <ListCitys key={city.id} city={city} />)
+        citys.map((city) => {
+          return <City key={city.id} cityValue={city.value} id={city.id} />;
+        })
       ) : (
         <span>Loading...</span>
       )}

@@ -4,6 +4,8 @@ export const selectCitysModule = (state) => state.search;
 
 export const selectGetHint = (state) => state.search.hint;
 
+export const selectGetTableRows = (state) => selectCitysModule(state).tableIds;
+
 export const selectCitysNameId = (state) => {
   return selectCitysModule(state).entities.map((item) => {
     return {
