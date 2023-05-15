@@ -11,20 +11,26 @@ export const Search = () => {
   const dispatch = useDispatch();
 
   const inpuRef = useRef(null);
-  const controllerRef = useRef();
+  // const controllerRef = useRef(null);
 
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-  const controller = new AbortController();
-  controllerRef.current = controller;
+  // const controller = new AbortController();
 
   useEffect(() => {
     if (debouncedSearchTerm) {
+      // controllerRef.current = null;
       dispatch(loadCities(debouncedSearchTerm));
     } else {
       dispatch(searchSlice.actions.hintForUser(""));
     }
   }, [debouncedSearchTerm]);
+
+  // const cancelSearch = () => {
+  //   console.log("22");
+  //   controllerRef.current = controller;
+  //   controllerRef.current.abort();
+  // };
 
   return (
     <div className={styles.root}>

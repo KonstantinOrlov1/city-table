@@ -1,7 +1,11 @@
 import { searchSlice } from "..";
 import { MINLENGTHAPI } from "../../../helpers/loadingStatuses";
 
-export const loadCities = (searchQuery) => (dispatch, getState) => {
+export const loadCities = (searchQuery) => (dispatch) => {
+  if (searchQuery.length === 0) {
+    return;
+  }
+
   if (searchQuery.length < MINLENGTHAPI) {
     dispatch(searchSlice.actions.hintForUser("Введите более 2х символов"));
     return;
@@ -19,6 +23,9 @@ export const loadCities = (searchQuery) => (dispatch, getState) => {
       }
     })
     .catch((err) => {
+      if (err.name == "AbortError") {
+        console.log("Прервано!");
+      }
       console.log(err.message);
       dispatch(searchSlice.actions.failLoading());
     });
