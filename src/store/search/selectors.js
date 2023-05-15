@@ -1,22 +1,25 @@
 import { LoadingStatuses } from "../../helpers/loadingStatuses";
 
-export const selectCitysModule = (state) => state.search;
+export const selectCitiesModule = (state) => state.search;
 
 export const selectGetHint = (state) => state.search.hint;
 
-export const selectGetTableRows = (state) => selectCitysModule(state).tableIds;
+export const selectGetTableRows = (state) => selectCitiesModule(state).tableIds;
 
-export const selectCitysNameId = (state) => {
-  return selectCitysModule(state).entities.map((item) => {
+export const selectArrTableData = (state) =>
+  Object.values(selectGetTableRows(state)) || [];
+
+export const selectCitiesNameId = (state) => {
+  return selectCitiesModule(state).entities.map((item) => {
     return {
       value: item?.value || "",
-      id: item.oktmo || `${Date.now()}`,
+      id: item?.oktmo || `${Date.now()}`,
     };
   });
 };
 
-export const selectcitysIsLoading = (state) =>
-  selectCitysModule(state).status === LoadingStatuses.inProgress;
+export const selectCitiesIsLoading = (state) =>
+  selectCitiesModule(state).status === LoadingStatuses.inProgress;
 
-export const selectcitysIsFaild = (state) =>
-  selectCitysModule(state).status === LoadingStatuses.failed;
+export const selectCitiesIsFaild = (state) =>
+  selectCitiesModule(state).status === LoadingStatuses.failed;

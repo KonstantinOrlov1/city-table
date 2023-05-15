@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { LoadingStatuses } from "../../helpers/loadingStatuses";
+import { actions } from "react-table";
 
 const initialState = {
   entities: [],
@@ -36,6 +37,9 @@ export const searchSlice = createSlice({
           return elem.oktmo === action.payload;
         }),
       };
+    },
+    deleteCity: (state, action) => {
+      delete state.tableIds[action.payload];
     },
   },
 });

@@ -1,22 +1,26 @@
 import { useDispatch } from "react-redux";
 import styles from "./styles.module.css";
-import { loadCitys } from "../../store/search/middleware/loadCitys";
-import { ListCitys } from "../listCitys/listCitys";
+import { loadCities } from "../../store/search/middleware/loadCities";
 import { useEffect, useRef, useState } from "react";
 import { useDebounce } from "../../hooks/useDebounce";
 import { searchSlice } from "../../store/search";
+import { ListCities } from "../listCities/listCities";
 
 export const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
 
   const inpuRef = useRef(null);
+  const controllerRef = useRef();
 
-  const debouncedSearchTerm = useDebounce(searchTerm, 50);
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+
+  const controller = new AbortController();
+  controllerRef.current = controller;
 
   useEffect(() => {
     if (debouncedSearchTerm) {
-      dispatch(loadCitys(debouncedSearchTerm));
+      dispatch(loadCities(debouncedSearchTerm));
     } else {
       dispatch(searchSlice.actions.hintForUser(""));
     }
@@ -32,10 +36,11 @@ export const Search = () => {
           type="text"
           placeholder="Введите город"
           className={styles.input}
+          value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           ref={inpuRef}
         />
-        <ListCitys inputRef={inpuRef} setText={setSearchTerm} />
+        <ListCities inputRef={inpuRef} setText={setSearchTerm} />
       </form>
     </div>
   );

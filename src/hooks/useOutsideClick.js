@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { searchSlice } from "../store/search";
 
-export const useOutsideClick = (listRef, inpurRef, citys, setText) => {
+export const useOutsideClick = (listRef, inpurRef, cities, setText) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!citys.length) {
+    if (!cities.length) {
       return;
     }
     const handleClick = (e) => {
@@ -23,5 +23,5 @@ export const useOutsideClick = (listRef, inpurRef, citys, setText) => {
     return () => {
       document.removeEventListener("click", handleClick);
     };
-  }, [citys]);
+  }, [cities]);
 };
