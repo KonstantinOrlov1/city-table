@@ -34,7 +34,7 @@ export const searchSlice = createSlice({
       state.tableIds = {
         ...state.tableIds,
         [action.payload]: state.entities.find((elem) => {
-          return elem.oktmo === action.payload;
+          return elem?.oktmo === action.payload;
         }),
       };
     },

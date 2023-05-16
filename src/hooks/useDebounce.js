@@ -13,5 +13,5 @@ export const useDebounce = (value, delay) => {
     };
   }, [value]);
 
-  return debouncedValue;
+  return debouncedValue.toLowerCase().trim();
 };

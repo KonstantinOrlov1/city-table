@@ -12,7 +12,7 @@ export const Table = () => {
   const data = useMemo(
     () =>
       tableRows.map((elem) => ({
-        col1: elem.oktmo,
+        col1: elem?.oktmo,
         col2: elem?.name_display || "нет данных",
         col3: elem?.description || "нет данных",
         col4: elem?.population || "нет данных",
