@@ -1,7 +1,7 @@
 import { searchSlice } from "..";
 import { MINLENGTHAPI } from "../../../helpers/loadingStatuses";
 
-export const loadCities = (searchQuery) => (dispatch) => {
+export const loadCities = (searchQuery, signal) => (dispatch) => {
   if (searchQuery.length === 0) {
     return;
   }
@@ -13,8 +13,12 @@ export const loadCities = (searchQuery) => (dispatch) => {
 
   dispatch(searchSlice.actions.startLoading());
 
-  fetch(`https://api.geotree.ru/search.php?term=${searchQuery}`)
-    .then((response) => response.json())
+  fetch(`https://api.geotree.ru/search.php?term=${searchQuery}`, {
+    signal: signal,
+  })
+    .then((response) => {
+      return response.json();
+    })
     .then((cities) => {
       if (cities.length !== 0) {
         dispatch(searchSlice.actions.successLoading(cities));
@@ -23,10 +27,11 @@ export const loadCities = (searchQuery) => (dispatch) => {
       }
     })
     .catch((err) => {
-      if (err.name == "AbortError") {
+      if (err.name === "AbortError") {
         console.log("Прервано!");
+      } else {
+        console.log(err.message);
+        dispatch(searchSlice.actions.failLoading());
       }
-      console.log(err.message);
-      dispatch(searchSlice.actions.failLoading());
     });
 };
