@@ -39,7 +39,7 @@ export const searchSlice = createSlice({
       };
     },
     deleteCity: (state, action) => {
-      delete state.tableIds[action.payload];
+      delete state.tableIds?.[action.payload];
     },
   },
 });

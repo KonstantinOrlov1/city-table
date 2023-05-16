@@ -34,7 +34,7 @@ export const Table = () => {
         Filter: ColumnFilter,
       },
       {
-        Header: "Полное области",
+        Header: "Название региона",
         accessor: "col3",
         Filter: ColumnFilter,
       },
@@ -77,7 +77,7 @@ export const Table = () => {
                 {...column.getHeaderProps(column.getSortByToggleProps())}
                 className={styles.th}
               >
-                <div className={styles.aaa}>
+                <div className={styles.container}>
                   <div>
                     {column.render("Header")}
                     <span>
