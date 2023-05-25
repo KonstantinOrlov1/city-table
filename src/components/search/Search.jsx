@@ -15,9 +15,9 @@ export const Search = () => {
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
   const controllerRef = useRef(null);
-  const controller = new AbortController();
 
   useEffect(() => {
+    const controller = new AbortController();
     controllerRef.current = controller;
 
     if (debouncedSearchTerm) {
